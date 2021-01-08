@@ -1,11 +1,11 @@
 import './App.css';
 
-import Counter from './component/Counter';
+import NavBar from './component/NavBar/index';
 
 function App() {
   return (
     <div>
-      <Counter/>
+      <NavBar/>
     </div>
   );
 }
