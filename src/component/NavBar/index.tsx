@@ -5,7 +5,7 @@ function NavBar(){
   return(
     <nav className="main-navbar"> 
       <Logo />
-      <a className="logo-text" href="home"> DS Delivery </a>
+      <a className="logo-text" href="/home"> DS Delivery </a>
     </nav>
   )
 }
