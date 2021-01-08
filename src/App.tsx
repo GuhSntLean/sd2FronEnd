@@ -1,12 +1,14 @@
 import './App.css';
 
-import NavBar from './component/NavBar/index';
+import NavBar from './component/NavBar';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div>
+    <>
       <NavBar/>
-    </div>
+      <Home />
+    </>
   );
 }
 
