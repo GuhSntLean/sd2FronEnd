@@ -1,8 +1,12 @@
 import './styles.css';
 
+import Stepheader from '../../component/Stepheader/Stepheader';
+
 function Orders(){
   return(
-    <h1>Olha minha pagina</h1>
+    <div className="orders-container">
+      <Stepheader/>
+    </div>
   )  
 }
 
