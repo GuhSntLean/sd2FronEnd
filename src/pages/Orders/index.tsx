@@ -5,6 +5,7 @@ import ProductsList from '../../component/ProductsList/ProductsList';
 import { useEffect, useState } from 'react';
 import { Product } from './types';
 import { fetchProducts } from '../../config/Api';
+import OrderLocation from '../../component/OrderLocation/OrderLocation';
 
 function Orders(){
   const[products, setProducts] = useState<Product []>([]);
@@ -20,6 +21,7 @@ function Orders(){
     <div className="orders-container">
       <Stepheader/>
       <ProductsList products={products}/>
+      <OrderLocation/>
     </div>
   );
 }
