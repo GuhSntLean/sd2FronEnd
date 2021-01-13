@@ -1,18 +1,10 @@
 import { Product } from '../../pages/Orders/types';
+import { formatPrice } from './helpers';
 
 type Props = {
   product: Product;
   onSelectProduct: (product: Product) => void ;
   isSelected: boolean;
-}
-
-function formatPrice(price: number){
-  const fotmatter = new Intl.NumberFormat('pt-BR',{
-    style:'currency',
-    currency: 'BRL',
-    minimumFractionDigits: 2
-  });
-  return fotmatter.format(price);
 }
 
 function ProductCard({product, onSelectProduct, isSelected}: Props){

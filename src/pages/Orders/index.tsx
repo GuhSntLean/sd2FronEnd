@@ -3,8 +3,9 @@ import './styles.css';
 import Stepheader from '../../component/Stepheader/Stepheader';
 import ProductsList from '../../component/ProductsList/ProductsList';
 import { useEffect, useState } from 'react';
-import { OrderLocationdata, Product } from './types';
-import { fetchProducts } from '../../config/Api';
+import { toast } from 'react-toastify';
+import { OrderLocationData, Product } from './types';
+import { fetchProducts, saveOrder } from '../../config/Api';
 import OrderLocation from '../../component/OrderLocation/OrderLocation';
 import OrderSummary from '../../component/OrderSummary';
 import Footer from '../../component/Footer';
@@ -13,7 +14,8 @@ import { checkIsSelected } from '../../component/ProductCard/helpers';
 function Orders(){
   const[products, setProducts] = useState<Product []>([]);
   const[selectedProducts, setSelectedProducts] = useState<Product []>([]);
-  const[orderLocation, setOrderLocation] = useState<OrderLocationdata>();
+  const[orderLocation, setOrderLocation] = useState<OrderLocationData>();
+  const totalPrice = selectedProducts.reduce((sum, item) => {return sum + item.price}, 0);
 
   useEffect(()=>{
     fetchProducts()
@@ -31,6 +33,24 @@ function Orders(){
     }
   }
 
+  const handleSumit = () => {
+    const productsIds = selectedProducts.map(({id}) => ({id}));
+    const payload = {
+      ...orderLocation!,
+      products : productsIds
+    }
+
+    saveOrder(payload)
+    .then((response) => {
+      toast.error(`Pedido realizado com sucesso Nº ${response.data.id}`);
+      setSelectedProducts([]);
+    })
+    .catch(() => {
+      toast.warning('Erro ao realizar o pedido');
+    })
+
+  }
+
   return(
     <>
       <div className="orders-container">
@@ -43,7 +63,10 @@ function Orders(){
         <OrderLocation 
           onChangeLocation={location => setOrderLocation(location)}
         />
-        <OrderSummary /> 
+        <OrderSummary 
+          amount={selectedProducts.length} 
+          totalPrice={totalPrice} 
+          onSubmit = {handleSumit}/> 
       </div>
       <Footer/>
     </>
