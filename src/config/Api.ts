@@ -1,11 +1,10 @@
 import axios from "axios";
 import { OrderPayload } from "../pages/Orders/types";
 
-const API_URL = "https://guhsntlean-sds2.herokuapp.com/";
+const API_URL = "https://cors-anywhere.herokuapp.com/https://guhsntlean-sds2.herokuapp.com/";
 const mapboxToken = process.env.REACT_APP_ACCESS_TOKEN_MAP_BOX ;
 
-export function fetchProducts(){
-  axios.defaults.headers['Access-Control-Allow-Origin'] ='*'
+export function fetchProducts(){  
   return axios(`${API_URL}products`,{
     headers: {
       'crossDomain': true,
